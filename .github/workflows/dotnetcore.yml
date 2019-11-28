@@ -1,6 +1,6 @@
 name: .NET Core
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -12,6 +12,23 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.108
-    - name: Build with dotnet
+        dotnet-version: 3.0.100
+    - name: Build 
       run: dotnet build --configuration Release
+    - name: Test C#
+      run: dotnet test ./tst/Gower.CSharp.Tests/Gower.CSharp.Tests.csproj
+    - name: Test F#
+      run: dotnet test ./tst/Gower.Tests/Gower.Tests.fsproj
+    - name: Build C# NuGet Package
+      run: 
+        dotnet pack ./src/Gower.CSharp/Gower.CSharp.csproj --configuration Release -o ./nuget
+    - name: Build F# Nuget Package
+      run:
+        dotnet pack ./src/Gower/Gower.fsproj --configuration Release -o ./nuget
+    - name: Deploy C# NuGet Package
+      run: 
+        dotnet nuget push /home/runner/work/SFX.Gower/SFX.Gower/nuget/SFX.Gower.CSharp.1.0.0.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+    - name: Deploy F# NuGet Package
+      run:  
+        dotnet nuget push /home/runner/work/SFX.Gower/SFX.Gower/nuget/SFX.Gower.1.0.0.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+
