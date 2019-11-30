@@ -27,8 +27,8 @@ jobs:
         dotnet pack ./src/Gower/Gower.fsproj --configuration Release -o ./nuget
     - name: Deploy C# NuGet Package
       run: 
-        dotnet nuget push /home/runner/work/SFX.Gower/SFX.Gower/nuget/SFX.Gower.CSharp.1.0.1.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push /home/runner/work/SFX.Gower/SFX.Gower/nuget/SFX.Gower.CSharp.1.0.2.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
     - name: Deploy F# NuGet Package
       run:  
-        dotnet nuget push /home/runner/work/SFX.Gower/SFX.Gower/nuget/SFX.Gower.1.0.1.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push /home/runner/work/SFX.Gower/SFX.Gower/nuget/SFX.Gower.1.0.2.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
