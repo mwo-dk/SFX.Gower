@@ -91,13 +91,13 @@ let internal getSij x =
     if b = 0 then (nan, false)
     else (a/(float b), true)
     
-let internal createAsymmetricDichotomous (c: DichotomousCharacter<'a>) =
+let createAsymmetricDichotomous (c: DichotomousCharacter<'a>) =
     fun x y -> dichotomousAsymmetricSimilarity (x |> c) (y |> c)
-let internal createSymmetricDichotomous (c: DichotomousCharacter<'a>) =
+let createSymmetricDichotomous (c: DichotomousCharacter<'a>) =
     fun x y -> dichotomousSymmetricSimilarity (x |> c) (y |> c)
-let internal createQualitative (c: QualitativeCharacter<'a>) =
+let createQualitative (c: QualitativeCharacter<'a>) =
     fun x y -> qualitativeSimilarity (x |> c) (y |> c)
-let internal createQuantitative (c: QuantitativeCharacter<'a>) =
+let createQuantitative (c: QuantitativeCharacter<'a>) =
     fun x y range -> quantitativeSimilarity (x |> c) (y |> c) range
 let fromConfig conf =
     let asymmetricDich =
